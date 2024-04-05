@@ -1,30 +1,28 @@
 import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
-import { AmbientLight, DirectionalLight, HemisphereLight } from "three";
 
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { AmbientLight, DirectionalLight, HemisphereLight } from "three";
 const width = window.innerWidth,
   height = window.innerHeight;
-const camera = new THREE.PerspectiveCamera(10, width / height, 0.01, 1000);
-const scene = new THREE.Scene();
-const renderer = new THREE.WebGLRenderer({ antialias: true });
 
+// init
+
+const camera = new THREE.PerspectiveCamera(10, width / height, 0.01, 1000);
+
+const scene = new THREE.Scene();
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(width, height);
 renderer.setAnimationLoop(animation);
 // document.body.appendChild(renderer.domElement);
 document.getElementById("webgl-container").appendChild(renderer.domElement);
 const loader = new GLTFLoader();
-const dracoLoader = new DRACOLoader();
-dracoLoader.setDecoderPath("/examples/jsm/libs/draco/");
-loader.setDRACOLoader(dracoLoader);
-
-//GLTFLoader
 
 animation;
 loader.load(
   // resource URL
-  "/bmet4racks.glb",
+  "assets/bmet4racks.glb",
   // called when the resource is loaded
   function (gltf) {
     // const root = gltf.scene;
@@ -38,23 +36,37 @@ loader.load(
     // gltf.scenes; // Array<THREE.Group>
     // gltf.cameras; // Array<THREE.Camera>
     // gltf.asset; // Object
+
+    // parseXml(xml);
+  },
+  // called while loading is progressing
+  function (xhr) {
+    console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+  },
+  // called when loading has errors
+  function (error) {
+    console.log(error);
   }
 );
 
-//Raycaster
 camera.position.z = 10;
 camera.position.y = 5;
 camera.position.x = 3;
 // camera.rotation.y = -4;
 const controls = new OrbitControls(camera, renderer.domElement);
+
+//controls.update() must be called after any manual changes to the camera's transform
 camera.position.set(0, 100, 100);
+
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
+
 renderer.domElement.addEventListener("click", onClick);
 
 function onClick(event) {
   mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
   mouse.y = -(event.clientY / renderer.domElement.clientHeight) * 2 + 1;
+
   raycaster.setFromCamera(mouse, camera);
 
   const intersects = raycaster.intersectObjects(scene.children, true);
@@ -93,100 +105,87 @@ function showModal(name) {
   });
 }
 
-// function updateHTMLSquaresForBox(boxName) {
-//   btn1.onclick = function () {
-//     displayBoxInfo(boxesToHandle[0]);
-//   };
-//   btn2.onclick = function () {
-//     displayBoxInfo(boxesToHandle[1]);
-//   };
-//   btn3.onclick = function () {
-//     displayBoxInfo(boxesToHandle[2]);
-//   };
+function animation() {
+  scene.add(ambientLight, mainLight);
 
-//   var baseNameParts = boxName.split("_");
-//   var baseBoxName = baseNameParts[0];
-//   console.log("Parts", baseNameParts);
-//   var boxesToHandle = [baseBoxName, `${baseBoxName}_1`, `${baseBoxName}_2`];
-//   console.log("Boxes to handle", boxesToHandle);
-//   console.log(
-//     "Boxes Names",
-//     baseBoxName,
-//     `${baseBoxName}_1`,
-//     `${baseBoxName}_2`
-//   );
-//   let colorHexes = boxesToHandle.map((name) => getColorHexString(name));
-//   $("#modalText").text("Modal should be shown now, name: " + boxesToHandle);
+  controls.update();
 
-//   // $(".pallet1").text(boxesToHandle[0]);
-//   // $(".pallet2").text(boxesToHandle[1]);
-//   // $(".pallet3").text(boxesToHandle[2]);
-//   console.log("Colors: ", colorHexes.join(", "));
-
-//   colorHexes.forEach((colorHex, index) => {
-//     $(`.square_p${index + 1}`).css("background-color", `#${colorHex}`);
-//   });
-// }
-
-// function getColorHexString(boxName) {
-//   const object = scene.getObjectByName(boxName);
-//   console.log("BoxName: ", object);
-
-//   if (object) {
-//     return object.material.color.getHexString();
-//   }
-//   return "";
-// }
-
+  renderer.render(scene, camera);
+}
 function updateHTMLSquaresForBox(boxName) {
-  // Other logic remains the same
-  btn1.onclick = function () {
-    displayBoxInfo(boxesToHandle[0]);
-  };
-  btn2.onclick = function () {
-    displayBoxInfo(boxesToHandle[1]);
-  };
-  btn3.onclick = function () {
-    displayBoxInfo(boxesToHandle[2]);
-  };
-  // Use the stored XML data to set button colors
-  var baseNameParts = boxName.split("_");
-  var baseBoxName = baseNameParts[0];
-  var boxesToHandle = [baseBoxName, `${baseBoxName}_1`, `${baseBoxName}_2`];
-  $("#modalText").text("Modal should be shown now, name: " + boxesToHandle);
+  // Extract the base box name
+  var baseBoxName = boxName.split("_")[0];
+  // Initialize the boxesToHandle array
+  var boxesToHandle = [];
+
+  // Dynamically generate boxesToHandle with the base box and two numbered boxes
+  for (let i = 0; i < 3; i++) {
+    boxesToHandle.push(i === 0 ? baseBoxName : `${baseBoxName}_${i}`);
+  }
+
+  // Update modal text using jQuery
+  $("#modalText").text(
+    "Modal should be shown now, name: " + boxesToHandle.join(", ")
+  );
+
+  // Dynamically set colors based on box status
   boxesToHandle.forEach((name, index) => {
-    // Assuming you have a function to map status to color
-    let status = boxDataFromXML[name];
-    let color = statusToColor(status); // You need to define statusToColor based on your color logic
+    let status = boxDataFromXML[name]; // Assuming you have a way to get the box's status
+    let color = statusToColor(status); // Convert status to color
+    console.log("Status Color: " + color);
+
+    // Assign onclick and onmouseover for each button using jQuery
+    $(`#myBtn${index + 1}`)
+      .off("click mouseover mouseout") // Remove previous event handlers to prevent duplication
+      .on("click", function () {
+        displayBoxInfo(name);
+      })
+      .on("mouseover", function () {
+        const box = scene.getObjectByName(name);
+        console.log("Object: " + name, "Color: " + color);
+        box.material.color.set(color);
+      })
+      .on("mouseout", function () {
+        const box = scene.getObjectByName(name);
+        box.material.color.set("black");
+      });
+
+    console.log(
+      "Status: " + status,
+      "Color:" + color,
+      "boxDatafromXML:" + boxDataFromXML[name]
+    );
+
+    // Update square color using jQuery
     $(`.square_p${index + 1}`).css("background-color", color);
   });
 }
 
-// Example statusToColor function (you need to implement this based on your requirements)
+// Example implementation of statusToColor, adjust as per your requirements
 function statusToColor(status) {
   switch (status) {
     case "Full":
-      return "green"; // Green
+      return "green";
     case "Overload":
-      return "red"; // Blue
-    // Add other cases as needed
+      return "red";
     case "Empty":
-      return "white"; // White
+      return "white";
+    // Add more cases as necessary
+    default:
+      return "gray"; // A default case for unexpected statuses
   }
 }
 
-function animation() {
-  scene.add(ambientLight, mainLight);
-  controls.update();
-  renderer.render(scene, camera);
-}
+var modal = document.getElementById("myModal");
 
 // Get the button that opens the modal
-var modal = document.getElementById("myModal");
+
 var btn1 = document.getElementById("myBtn1");
 var btn2 = document.getElementById("myBtn2");
 var btn3 = document.getElementById("myBtn3");
+
 var boxes = document.querySelectorAll(".pallet_content > div");
+
 var span = document.getElementsByClassName("close-second")[0];
 
 function displayBoxInfo(classname) {
@@ -214,6 +213,40 @@ window.onclick = function (event) {
     modal.style.display = "none";
   }
 };
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("myBtn4").addEventListener("click", () => {
+    // Fetch data from the server (replace "/data" with your actual API endpoint)
+    fetch("/data")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        const palletDiv = document.getElementById("pallet_content");
+
+        // Loop through the retrieved data and create <p> elements
+        data.forEach((item) => {
+          // const p = document.createElement("p");
+          // p.textContent = `${item.WarehouseCode}, ${item.PalletCode}`;
+          $("#pallet_content").append(`
+          <div class=".pallet_content" style="display: none;">
+              <p>Warehouse: ${item.LocationCode}</p>
+       
+          </div>
+      `);
+
+          console.log(item.LocationCode);
+        });
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  });
+});
+
 $(function () {
   fetch("data.xml")
     .then((response) => response.text())
@@ -250,149 +283,9 @@ function parseXml(xml) {
       // updateBoxColorInThreeJS(classname, palletStatus);
     });
 }
-
-// function updateBoxColorInThreeJS(classname, palletStatus) {
-//   const boxObject = scene.getObjectByName(classname);
-
-//   if (boxObject) {
-//     switch (palletStatus) {
-//       case "Empty":
-//         boxObject.material.color.set("white");
-//         boxObject.material.opacity = 0.5;
-//         break;
-
-//       case "Partial":
-//         boxObject.material.color.set("blue");
-//         break;
-
-//       case "Full":
-//         boxObject.material.color.set("green");
-//         break;
-
-//       case "Overload":
-//         boxObject.material.color.set("red");
-//         break;
-
-//       default:
-//         break;
-//     }
-//   }
-// }
-
-// SINGLE HOVER
-// let hoveredObj = null;
-// let originalColor = new THREE.Color();
-// function onMouseMove(event) {
-//   mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
-//   mouse.y = -(event.clientY / renderer.domElement.clientHeight) * 2 + 1;
-
-//   raycaster.setFromCamera(mouse, camera);
-
-//   const intersects = raycaster.intersectObjects(scene.children, true);
-//   const validBoxPrefix = "Box";
-//   const filteredIntersects = intersects.filter((intersect) =>
-//     intersect.object.name.startsWith(validBoxPrefix)
-//   );
-
-//   if (
-//     hoveredObj &&
-//     (!filteredIntersects.length || hoveredObj !== filteredIntersects[0].object)
-//   ) {
-//     // Restore original color if not hovering over the same object
-//     hoveredObj.material.color.copy(originalColor);
-//     hoveredObj = null;
-//   }
-
-//   if (filteredIntersects.length > 0) {
-//     const intersected = filteredIntersects[0].object;
-
-//     if (hoveredObj !== intersected) {
-//       hoveredObj = intersected;
-//       originalColor.copy(intersected.material.color);
-//       // showModal(intersected.name);
-//       // Change color based on pallet status
-
-//       // Assuming you have a function to map status to color
-//       const palletStatus = boxDataFromXML[hoveredObj.name];
-//       const color = statusToColor(palletStatus); // Assuming statusToColor function is defined
-//       hoveredObj.material.color.set(color);
-//     }
-//   }
-// }
-
-// renderer.domElement.addEventListener("mousemove", onMouseMove);
-
-// MULTIPLE HOVER
-
 let hoveredObj = null;
+
 let boxesInRow = [];
-// function onMouseMove(event) {
-//   mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
-//   mouse.y = -(event.clientY / renderer.domElement.clientHeight) * 2 + 1;
-
-//   raycaster.setFromCamera(mouse, camera);
-
-//   const intersects = raycaster.intersectObjects(scene.children, true);
-//   const validBoxPrefix = "Box";
-//   const filteredIntersects = intersects.filter((intersect) =>
-//     intersect.object.name.startsWith(validBoxPrefix)
-//   );
-
-//   if (hoveredObj) {
-//     // Check if we're still hovering over the same object or any of its related boxes
-//     if (
-//       !filteredIntersects.length ||
-//       !boxesInRow.includes(filteredIntersects[0].object)
-//     ) {
-//       // Restore original colors to all related boxes and clear the list
-//       boxesInRow.forEach((box) => {
-//         if (box.originalColor) box.material.color.copy(box.originalColor);
-//       });
-//       boxesInRow = [];
-//       hoveredObj = null; // Clear the hovered object since we're no longer hovering over it
-//     }
-//   }
-
-//   if (
-//     filteredIntersects.length > 0 &&
-//     (!hoveredObj || !boxesInRow.includes(filteredIntersects[0].object))
-//   ) {
-//     const intersected = filteredIntersects[0].object;
-
-//     // Clear previous boxesInRow if moving to a new row
-//     if (hoveredObj !== intersected) {
-//       boxesInRow.forEach((box) => {
-//         if (box.originalColor) box.material.color.copy(box.originalColor);
-//       });
-//       boxesInRow = [];
-//     }
-
-//     hoveredObj = intersected;
-//     var intersectedRow = intersected.name.split("_")[0];
-//     var boxesHandle = [
-//       intersectedRow,
-//       `${intersectedRow}_1`,
-//       `${intersectedRow}_2`,
-//     ];
-//     boxesHandle.forEach((boxName) => {
-//       let box = scene.getObjectByName(boxName);
-//       if (box) {
-//         boxesInRow.push(box);
-//         // Store original color if it hasn't been stored yet
-//         if (!box.originalColor) {
-//           box.originalColor = box.material.color.clone();
-//         }
-//         // Optionally change the color, e.g., to indicate hover
-//         // showModal(intersected.name);
-//         const palletStatus = boxDataFromXML[box.name];
-//         const color = statusToColor(palletStatus); // Assumes statusToColor function is defined
-//         box.material.color.set(color);
-//       }
-//     });
-//   }
-// }
-
-// For Looop
 function onMouseMove(event) {
   mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
   mouse.y = -(event.clientY / renderer.domElement.clientHeight) * 2 + 1;

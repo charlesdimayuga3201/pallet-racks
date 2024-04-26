@@ -3,6 +3,8 @@ import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { AmbientLight, DirectionalLight, HemisphereLight } from "three";
+// const width = canvas.innerWidth,
+//   height = canvas.innerHeight;
 const width = window.innerWidth,
   height = window.innerHeight;
 
@@ -17,12 +19,15 @@ renderer.setSize(width, height);
 renderer.setAnimationLoop(animation);
 // document.body.appendChild(renderer.domElement);
 document.getElementById("webgl-container").appendChild(renderer.domElement);
+// var canvas = document
+//   .getElementById("webgl-container")
+//   .appendChild(renderer.domElement);
 const loader = new GLTFLoader();
 
 animation;
 loader.load(
   // resource URL
-  "assets/bmet4racks.glb",
+  "assets/bmetrack.glb",
   // called when the resource is loaded
   function (gltf) {
     // const root = gltf.scene;
@@ -63,6 +68,18 @@ const mouse = new THREE.Vector2();
 
 renderer.domElement.addEventListener("click", onClick);
 
+// Add a function to handle window resize events
+// function onWindowResize() {
+//   camera.aspect = canvas.innerWidth / canvas.innerHeight;
+//   camera.updateProjectionMatrix();
+//   renderer.setSize(canvas.innerWidth, canvas.innerHeight);
+// }
+
+// // Listen for window resize events
+// window.addEventListener("resize", onWindowResize);
+
+// // Call the onWindowResize function once to set up the initial sizes
+// onWindowResize();
 function onClick(event) {
   mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
   mouse.y = -(event.clientY / renderer.domElement.clientHeight) * 2 + 1;
@@ -81,6 +98,7 @@ function onClick(event) {
     const object = filteredIntersects[0].object;
     // object.material.opacity = 0.5;
     showModal(object.name);
+    console.log("OBJ NAME: ", object.name);
   }
 }
 const { ambientLight, mainLight } = createLights();
@@ -96,13 +114,7 @@ function createLights() {
 function showModal(name) {
   // $("#modalText").text("Modal should be shown now, name: " + name);
   updateHTMLSquaresForBox(name);
-
-  $("#infoModal").css("display", "block");
-  // $("#infoModal").css("display", "flex");
-
-  $(document).on("click", ".close", function () {
-    $("#infoModal").css("display", "none");
-  });
+  FilteredPalletData(name);
 }
 
 function animation() {
@@ -122,7 +134,6 @@ function updateHTMLSquaresForBox(boxName) {
   for (let i = 0; i < 3; i++) {
     boxesToHandle.push(i === 0 ? baseBoxName : `${baseBoxName}_${i}`);
   }
-
   // Update modal text using jQuery
   $("#modalText").text(
     "Modal should be shown now, name: " + boxesToHandle.join(", ")
@@ -133,21 +144,43 @@ function updateHTMLSquaresForBox(boxName) {
     let status = boxDataFromXML[name]; // Assuming you have a way to get the box's status
     let color = statusToColor(status); // Convert status to color
     console.log("Status Color: " + color);
-
-    // Assign onclick and onmouseover for each button using jQuery
+    $(`#myBtn${index + 1}`).off("mouseenter mouseleave click");
     $(`#myBtn${index + 1}`)
-      .off("click mouseover mouseout") // Remove previous event handlers to prevent duplication
-      .on("click", function () {
-        displayBoxInfo(name);
-      })
-      .on("mouseover", function () {
+      .on("mouseenter", (event) => {
         const box = scene.getObjectByName(name);
-        console.log("Object: " + name, "Color: " + color);
+        // displayBoxInfo(name);
+        box.material.color.set(color);
+        scene.traverse((obj) => {
+          if (obj.name.startsWith("Box") && obj.name !== name) {
+            console.log("Test: ", obj.name);
+            obj.material.transparent = true;
+            obj.material.opacity = 0.2;
+            obj.material.needsUpdate = true;
+            // obj.material.opacity = 0.1;
+            // obj.material.opacity = 0.2;
+          }
+
+          // console.log(obj.name, name);
+        });
+      })
+      .on("click", (event) => {
+        displayBoxInfo(name);
+        const box = scene.getObjectByName(name);
+        // displayBoxInfo(name);
         box.material.color.set(color);
       })
-      .on("mouseout", function () {
+      .on("mouseleave", (event) => {
         const box = scene.getObjectByName(name);
         box.material.color.set("black");
+        scene.traverse((obj) => {
+          if (obj.name.startsWith("Box")) {
+            obj.material.transparent = false;
+            obj.material.opacity = 1;
+            obj.material.needsUpdate = true;
+            // obj.material.opacity = 0.1;
+            // obj.material.opacity = 0.2;
+          }
+        });
       });
 
     console.log(
@@ -157,10 +190,12 @@ function updateHTMLSquaresForBox(boxName) {
     );
 
     // Update square color using jQuery
+
+    $(`#myBtn${index + 1}`).css("background-color", color);
+    $(`#myBtn${index + 1}`).css("border-color", "#343434");
     $(`.square_p${index + 1}`).css("background-color", color);
   });
 }
-
 // Example implementation of statusToColor, adjust as per your requirements
 function statusToColor(status) {
   switch (status) {
@@ -176,15 +211,9 @@ function statusToColor(status) {
   }
 }
 
-var modal = document.getElementById("myModal");
+var modal = document.getElementById("infoModal");
 
 // Get the button that opens the modal
-
-var btn1 = document.getElementById("myBtn1");
-var btn2 = document.getElementById("myBtn2");
-var btn3 = document.getElementById("myBtn3");
-
-var boxes = document.querySelectorAll(".pallet_content > div");
 
 var span = document.getElementsByClassName("close-second")[0];
 
@@ -192,7 +221,7 @@ function displayBoxInfo(classname) {
   var boxContent = document.querySelector(`.${classname}`);
   if (boxContent) {
     // Hide all box contents
-    var allBoxContents = document.querySelectorAll(".pallet_content > div");
+    var allBoxContents = document.querySelectorAll("#boxAccordion > div ");
     allBoxContents.forEach(function (box) {
       box.style.display = "none";
     });
@@ -204,88 +233,136 @@ function displayBoxInfo(classname) {
     modal.style.display = "block";
   }
 }
-span.onclick = function () {
-  modal.style.display = "none";
-};
 
-window.onclick = function (event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-};
-
-document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("myBtn4").addEventListener("click", () => {
-    // Fetch data from the server (replace "/data" with your actual API endpoint)
-    fetch("/data")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        const palletDiv = document.getElementById("pallet_content");
-
-        // Loop through the retrieved data and create <p> elements
-        data.forEach((item) => {
-          // const p = document.createElement("p");
-          // p.textContent = `${item.WarehouseCode}, ${item.PalletCode}`;
-          $("#pallet_content").append(`
-          <div class=".pallet_content" style="display: none;">
-              <p>Warehouse: ${item.LocationCode}</p>
-       
-          </div>
-      `);
-
-          console.log(item.LocationCode);
-        });
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  });
-});
-
+let xmlData = null; // global variable to store XML data
+let boxDataFromXML = {};
+let boxesToHandle = [];
 $(function () {
   fetch("data.xml")
     .then((response) => response.text())
     .then((data) => {
       const parser = new DOMParser();
-      const xml = parser.parseFromString(data, "application/xml");
-      parseXml(xml);
+      xmlData = parser.parseFromString(data, "application/xml");
+      parseXml(xmlData, boxesToHandle);
     })
     .catch((error) => console.error("Error fetching the XML:", error));
 });
 
-let boxDataFromXML = {};
-function parseXml(xml) {
-  $(".pallet_content").empty();
-  console.log(xml);
+function parseXml(xml, boxesToHandle = []) {
+  $("#boxAccordion").empty(); // Clear existing accordion items
   $(xml)
     .find("box")
-    .each(function () {
+    .each(function (boxIndex) {
       var classname = $(this).attr("class");
-      var warehouse = $(this).find("warehouse").text();
-      var storageType = $(this).find("storageType").text();
-      var palletContent = $(this).find("palletContent").text();
       var palletStatus = $(this).find("palletStatus").text();
       boxDataFromXML[classname] = palletStatus;
-      $(".pallet_content").append(`
-          <div class="${classname}" style="display: none;">
-              <p>Warehouse: ${warehouse}</p>
-              <p>Storage Type: ${storageType}</p>
-              <p>Pallet Content: ${palletContent}</p>
-              <p>Pallet Status: ${palletStatus}</p>
-          </div>
-      `);
 
-      // updateBoxColorInThreeJS(classname, palletStatus);
+      // Check if classname exists in boxesToHandle array
+      if (!boxesToHandle.length || boxesToHandle.includes(classname)) {
+        // Create accordion item for the box
+        var accordionItem = $(`
+          <div class="accordion-item border">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapse${boxIndex}"
+                aria-expanded="false"
+                aria-controls="collapse${boxIndex}">
+                Box: ${classname}
+              </button>
+            </h2>
+            <div
+              id="collapse${boxIndex}"
+              class="accordion-collapse collapse"
+              data-bs-parent="#boxAccordion">
+              <div class="accordion-body">
+                <div id="accordionParent${boxIndex}" class="accordion-style">
+                </div>
+              </div>
+            </div>
+          </div>
+        `);
+
+        // Append accordion item to the accordion container
+        $("#boxAccordion").append(accordionItem);
+
+        // Iterate over child elements of the box to create nested accordions
+        $(this)
+          .find("warehouse")
+          .each(function (warehouseIndex) {
+            var warehouse = $(this).text();
+            var storageType = $(this).next("storageType").text();
+            var palletContent = $(this)
+              .next("storageType")
+              .next("palletContent")
+              .text();
+            var palletStatus = $(this)
+              .next("storageType")
+              .next("palletContent")
+              .next("palletStatus")
+              .text();
+
+            // Create nested accordion for warehouse data
+            var nestedAccordion = $(`
+            <div class="accordion accordion-flush pb-2">
+              <div class="card">
+                <div class="card-header  id="headingOne"">
+                  <h5 class="mb-0">
+                    <button
+                      class="btn btn-link collapsed"
+                   
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseNested${boxIndex}_${warehouseIndex}"
+                      aria-expanded="false"
+                      aria-controls="collapseNested${boxIndex}_${warehouseIndex}">
+                      Warehouse: ${warehouse}
+                    </button>
+                  </h5>
+                </div>
+                <div
+                  id="collapseNested${boxIndex}_${warehouseIndex}"
+                  aria-labelledby="headingOne"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#accordionParent${boxIndex}">
+                  <div class="card-body position-relative">
+                    <p>Storage Type: ${storageType}</p>
+                    <p>Pallet Content: ${palletContent}</p>
+                    <p>Pallet Status: ${palletStatus}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `);
+
+            // Append nested accordion to the accordion parent
+            accordionItem
+              .find(`#accordionParent${boxIndex}`)
+              .append(nestedAccordion);
+          });
+      }
     });
 }
-let hoveredObj = null;
 
+// When filtering:
+function FilteredPalletData(boxName) {
+  var baseBoxName = boxName.split("_")[0];
+  boxesToHandle = [];
+  for (let i = 0; i < 3; i++) {
+    boxesToHandle.push(i === 0 ? baseBoxName : `${baseBoxName}_${i}`);
+  }
+  if (xmlData) {
+    parseXml(xmlData, boxesToHandle);
+    $("#boxAccordion").css("display", "block");
+    $("#boxAccordion").show();
+  } else {
+    console.error("XML data not loaded");
+  }
+}
+let hoveredObj = null;
 let boxesInRow = [];
+const originalColors = {};
 function onMouseMove(event) {
   mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
   mouse.y = -(event.clientY / renderer.domElement.clientHeight) * 2 + 1;
@@ -298,59 +375,51 @@ function onMouseMove(event) {
     intersect.object.name.startsWith(validBoxPrefix)
   );
 
-  if (hoveredObj) {
-    if (
-      !filteredIntersects.length ||
-      !boxesInRow.includes(filteredIntersects[0].object)
-    ) {
-      boxesInRow.forEach((box) => {
-        if (box.originalColor) box.material.color.copy(box.originalColor);
-      });
-      boxesInRow = [];
-      hoveredObj = null;
-    }
+  // Check if previously hovered object is not in the current hover
+  if (
+    hoveredObj &&
+    (!filteredIntersects.length || filteredIntersects[0].object !== hoveredObj)
+  ) {
+    // Reset all boxes in the row to their original color
+    scene.traverse((obj) => {
+      if (obj.name.startsWith("Box") && obj.name.startsWith("Box")) {
+        obj.material.color.set(originalColors[obj.name]);
+        obj.material.transparent = false;
+        obj.material.opacity = 1;
+        obj.material.needsUpdate = true;
+      }
+    });
+    hoveredObj = null;
+    boxesInRow = [];
   }
 
-  if (
-    filteredIntersects.length > 0 &&
-    (!hoveredObj || !boxesInRow.includes(filteredIntersects[0].object))
-  ) {
+  if (filteredIntersects.length > 0) {
     const intersected = filteredIntersects[0].object;
 
+    // Detect if the hovered object has changed
     if (hoveredObj !== intersected) {
-      boxesInRow.forEach((box) => {
-        if (box.originalColor) box.material.color.copy(box.originalColor);
-      });
+      hoveredObj = intersected;
+
       boxesInRow = [];
-    }
+      var intersectedRow = intersected.name.split("_")[0];
 
-    hoveredObj = intersected;
-    var intersectedRow = intersected.name.split("_")[0];
+      // Apply new hover effects
+      scene.traverse((obj) => {
+        if (obj.name.startsWith(intersectedRow)) {
+          if (!originalColors[obj.name]) {
+            originalColors[obj.name] = obj.material.color.clone();
+          }
 
-    // Assuming intersectedRow itself should be included
-    boxesInRow.push(intersected);
-    if (!intersected.originalColor) {
-      intersected.originalColor = intersected.material.color.clone();
-    }
-    intersected.material.color.set(
-      statusToColor(boxDataFromXML[intersected.name])
-    );
-
-    // Use a for loop to dynamically check and add boxes
-    for (let index = 0; ; index++) {
-      let boxName = index === 0 ? intersectedRow : `${intersectedRow}_${index}`;
-      let box = scene.getObjectByName(boxName);
-      console.log("Boxrow:", boxName);
-      if (box) {
-        boxesInRow.push(box);
-        if (!box.originalColor) {
-          box.originalColor = box.material.color.clone();
+          obj.material.color.set(statusToColor(boxDataFromXML[obj.name]));
+          boxesInRow.push(obj);
+        } else if (obj.name.startsWith("Box")) {
+          obj.material.transparent = true;
+          obj.material.opacity = 0.2;
+          obj.material.needsUpdate = true;
         }
-        box.material.color.set(statusToColor(boxDataFromXML[box.name]));
-      } else {
-        break; // If no box is found, exit the loop
-      }
+      });
     }
   }
 }
+
 renderer.domElement.addEventListener("mousemove", onMouseMove);

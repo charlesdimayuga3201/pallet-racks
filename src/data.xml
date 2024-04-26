@@ -5,6 +5,15 @@
         <storageType>Storage Dry</storageType>
         <palletContent>Package Cardboard</palletContent>
         <palletStatus>Empty</palletStatus>
+        <warehouse>Mets 4</warehouse>
+        <storageType>Storage Dry</storageType>
+        <palletContent>Package Cardboard</palletContent>
+        <palletStatus>Full</palletStatus>
+               <warehouse>Mets 4</warehouse>
+        <storageType>Storage Dry</storageType>
+        <palletContent>Package Cardboard</palletContent>
+        <palletStatus>Full</palletStatus>
+        
         
     </box>
     <box class="Box1_1">

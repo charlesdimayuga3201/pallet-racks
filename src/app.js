@@ -68,3 +68,36 @@ $(function () {
     });
   });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("myBtn4").addEventListener("click", () => {
+    // Fetch data from the server (replace "/data" with your actual API endpoint)
+    fetch("/data")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // const palletDiv = document.getElementById("pallet_content");
+
+        // Loop through the retrieved data and create <p> elements
+        data.forEach((item) => {
+          // const p = document.createElement("p");
+          // p.textContent = `${item.WarehouseCode}, ${item.PalletCode}`;
+          $("#pallet_content").append(`
+          <div id"pallet_content" style="display: block;">
+              <p>Warehouse: ${item.LocationCode}</p>
+       
+          </div>
+      `);
+
+          console.log(item.LocationCode);
+        });
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  });
+});

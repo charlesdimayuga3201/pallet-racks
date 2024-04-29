@@ -124,15 +124,21 @@ function animation() {
 
   renderer.render(scene, camera);
 }
+
+// $(".accordion").on("mouseenter", ".tcollapse5", (event) => {
+//   console.log(true);
+// });
+
 function updateHTMLSquaresForBox(boxName) {
   // Extract the base box name
   var baseBoxName = boxName.split("_")[0];
   // Initialize the boxesToHandle array
-  var boxesToHandle = [];
+  boxesToHandle = [];
 
   // Dynamically generate boxesToHandle with the base box and two numbered boxes
   for (let i = 0; i < 3; i++) {
     boxesToHandle.push(i === 0 ? baseBoxName : `${baseBoxName}_${i}`);
+    console.log("boxesToHandle: " + boxesToHandle);
   }
   // Update modal text using jQuery
   $("#modalText").text(
@@ -144,15 +150,17 @@ function updateHTMLSquaresForBox(boxName) {
     let status = boxDataFromXML[name]; // Assuming you have a way to get the box's status
     let color = statusToColor(status); // Convert status to color
     console.log("Status Color: " + color);
-    $(`#myBtn${index + 1}`).off("mouseenter mouseleave click");
-    $(`#myBtn${index + 1}`)
-      .on("mouseenter", (event) => {
+    console.log(`Binding events to .tcollapse${index + 1}`);
+    $(".accordion").off("mouseenter mouseleave", `.tcollapse${index + 1}`);
+    $(".accordion")
+      .on("mouseenter", `.tcollapse${index + 1}`, (event) => {
         const box = scene.getObjectByName(name);
+        // console.log("Tcollapse box: " + $(`.tcollapse${index + 1}`));
         // displayBoxInfo(name);
         box.material.color.set(color);
         scene.traverse((obj) => {
           if (obj.name.startsWith("Box") && obj.name !== name) {
-            console.log("Test: ", obj.name);
+            // console.log("Test: ", obj.name);
             obj.material.transparent = true;
             obj.material.opacity = 0.2;
             obj.material.needsUpdate = true;
@@ -163,13 +171,8 @@ function updateHTMLSquaresForBox(boxName) {
           // console.log(obj.name, name);
         });
       })
-      .on("click", (event) => {
-        displayBoxInfo(name);
-        const box = scene.getObjectByName(name);
-        // displayBoxInfo(name);
-        box.material.color.set(color);
-      })
-      .on("mouseleave", (event) => {
+
+      .on("mouseleave", `.tcollapse${index + 1}`, (event) => {
         const box = scene.getObjectByName(name);
         box.material.color.set("black");
         scene.traverse((obj) => {
@@ -191,8 +194,8 @@ function updateHTMLSquaresForBox(boxName) {
 
     // Update square color using jQuery
 
-    $(`#myBtn${index + 1}`).css("background-color", color);
-    $(`#myBtn${index + 1}`).css("border-color", "#343434");
+    $(`.tcollapse${index + 1}`).css("background-color", color);
+    $(`.tcollapse${index + 1}`).css("border-color", "#343434");
     $(`.square_p${index + 1}`).css("background-color", color);
   });
 }
@@ -221,7 +224,7 @@ function displayBoxInfo(classname) {
   var boxContent = document.querySelector(`.${classname}`);
   if (boxContent) {
     // Hide all box contents
-    var allBoxContents = document.querySelectorAll("#boxAccordion > div ");
+    var allBoxContents = document.querySelectorAll(".pallet_content > div ");
     allBoxContents.forEach(function (box) {
       box.style.display = "none";
     });
@@ -253,6 +256,7 @@ function parseXml(xml, boxesToHandle = []) {
   $(xml)
     .find("box")
     .each(function (boxIndex) {
+      console.log("BoxIndex", boxIndex);
       var classname = $(this).attr("class");
       var palletStatus = $(this).find("palletStatus").text();
       boxDataFromXML[classname] = palletStatus;
@@ -261,10 +265,13 @@ function parseXml(xml, boxesToHandle = []) {
       if (!boxesToHandle.length || boxesToHandle.includes(classname)) {
         // Create accordion item for the box
         var accordionItem = $(`
-          <div class="accordion-item border">
-            <h2 class="accordion-header">
+          <div class="accordion-item border ">
+            <h2 class="accordion-header tcollapse${
+              boxIndex + 1
+            }" id = "tcollapse${boxIndex + 1}">
               <button
-                class="accordion-button collapsed"
+                class="accordion-button collapsed z-3"
+
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#collapse${boxIndex}"
@@ -306,7 +313,9 @@ function parseXml(xml, boxesToHandle = []) {
 
             // Create nested accordion for warehouse data
             var nestedAccordion = $(`
-            <div class="accordion accordion-flush pb-2">
+            <div class="accordion accordion-flush pb-2 tcollapse${
+              boxIndex + 1
+            } ">
               <div class="card">
                 <div class="card-header  id="headingOne"">
                   <h5 class="mb-0">

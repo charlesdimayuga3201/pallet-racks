@@ -170,3 +170,7 @@
     margin-left: 100px;
   }
 }
+
+.collapse {
+  transition: height 0.35s ease;
+}

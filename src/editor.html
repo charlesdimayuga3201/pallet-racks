@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -22,19 +23,19 @@
         }
       }
     </script>
+
+    <link rel="stylesheet" href="dropdown.css" />
+    <link rel="stylesheet" href="title.css" />
     <link rel="stylesheet" href="tool.css" />
     <link rel="stylesheet" href="btn_card.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Editor</title>
-
-    
   </head>
   <body>
-
-<main class="d-flex flex-row">  <header id="header" class="d-flex flex-column justify-content-center">  
-  <nav id="navbar" class="navbar nav-menu">
- 
-  <!-- <ul>
+    <main class="d-flex flex-row">
+      <header id="header" class="d-flex flex-column justify-content-center">
+        <nav id="navbar" class="navbar nav-menu">
+          <!-- <ul>
     <li><a href="" role="button" class="nav-link scrollto"><button class="fbtn btn"><i class="bi bi-bricks"></i> <span>Wall Creation</span></a></button></li>
     <li><a href="" role="button" class="nav-link scrollto"><button class="fbtn btn"><i class="bi bi-hdd-rack"></i> <span>Rack Configuration</span></a></button></li>
     <li><a href="" role="button" class="nav-link scrollto"><button class="fbtn btn"><i class="bi bi-escape"></i> <span>Escape</span></a></button></li>
@@ -44,73 +45,336 @@
     <li><a href="" role="button" class="nav-link scrollto"><button class="fbtn btn"><i class="bi bi-eraser"></i><span>Eraser</span></a></button></li>
     <li><a href="" role="button" class="nav-link scrollto"><button class="fbtn btn"><i class="bi bi-arrow-clockwise"></i><span>Reset Camera View</span></a></button></li>
   </ul> -->
-  <ul>
-    <li><button id="wallBtn" class="fbtn btn" data-bs-toggle="button" ><i class="bi bi-bricks"></i> <span>Wall Creation</span></button></li>
-    <li><button id="rackBtn" class="fbtn btn" data-bs-toggle="button"><i class="bi bi-hdd-rack"></i> <span>Rack Configuration</span></button></li>
-    <li><button id="escapeBtn" class="fbtn btn" data-bs-toggle="button"><i class="bi bi-escape"></i> <span>Escape</span></button></li>
-    <li><button id="rowsBtn" class="fbtn btn" data-bs-toggle="button"><i class="bi bi-arrows-expand-vertical"></i></i><span>Select Rows</span></button></li>
-    <li><button id="saveBtn" class="fbtn btn" data-bs-toggle="button"><i class="bi bi-save"></i> <span>Save Project</span></button></li>
-    <li><button id="openBtn" class="fbtn btn" data-bs-toggle="button"><i class="bi bi-folder2-open"></i> <span>Open Project</span></button></li>
-    <li><button id="eraserBtn" class="fbtn btn" data-bs-toggle="button"><i class="bi bi-eraser"></i><span>Eraser</span></button></li>
-    <li><button id="resetBtn" class="fbtn btn" data-bs-toggle="button"><i class="bi bi-arrow-clockwise"></i><span>Reset Camera View</span></button></li>
-  </ul>
-</nav></header></main>
+          <ul>
+            <li>
+              <button id="wallBtn" class="fbtn btn" data-bs-toggle="button">
+                <i class="bi bi-bricks"></i> <span>Wall Creation</span>
+              </button>
+            </li>
+            <li>
+              <button id="rackBtn" class="fbtn btn" data-bs-toggle="button">
+                <i class="bi bi-hdd-rack"></i> <span>Rack Configuration</span>
+              </button>
+            </li>
+            <li>
+              <button id="escapeBtn" class="fbtn btn" data-bs-toggle="button">
+                <i class="bi bi-escape"></i> <span>Escape</span>
+              </button>
+            </li>
+            <li>
+              <button id="rowsBtn" class="fbtn btn" data-bs-toggle="button">
+                <i class="bi bi-arrows-expand-vertical"></i
+                ><span>Select Rows</span>
+              </button>
+            </li>
+            <li>
+              <button id="saveBtn" class="fbtn btn" data-bs-toggle="button">
+                <i class="bi bi-save"></i> <span>Save Project</span>
+              </button>
+            </li>
+            <li>
+              <button id="openBtn" class="fbtn btn" data-bs-toggle="button">
+                <i class="bi bi-folder2-open"></i> <span>Open Project</span>
+              </button>
+            </li>
+            <li>
+              <button id="eraserBtn" class="fbtn btn" data-bs-toggle="button">
+                <i class="bi bi-eraser"></i><span>Eraser</span>
+              </button>
+            </li>
+            <li>
+              <button id="resetBtn" class="fbtn btn" data-bs-toggle="button">
+                <i class="bi bi-arrow-clockwise"></i
+                ><span>Reset Camera View</span>
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </header>
+    </main>
     <main class="d-flex flex-row-reverse">
-    
-    
-    <div
+      <div
+        id="collapseParent"
         class="d-flex flex-column z-3 flex-shrink-0 p-3 min-vh-100 ps-4 shadow bg-body-tertiary rounded"
         style="width: 500px">
-    <section class="container pt-5 ">
-        <div class="pt-2 mt-30">
-          <div class="-30 pb-5">
-              <div class="card" >
-                  <div class="box-shadow bg-white rounded-circle mx-auto text-center" style="width: 130px; height: 130px; margin-top: -40px;"><img src="assets/mets_logorm.png" class="img-fluid " alt=""></div>
-                  <div class="card-body text-center">
-                      <h3 class="card-title">Mets 3D Warehouse</h3>
-        
-                      <p class="card-text text-sm">Welcome to Editor Mets 3D Warehouse <br>Mapping and Maintenance of the Warehouse Contents </p>
-                      <p class="d-inline-flex  mx-auto">
-                        <button
-                          class=" btn btn-primary dim btn-large-dim w-xs"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#collapseInfo"
-                          aria-expanded="false"
-                          aria-controls="collapseInfo">
-                          
-                          <i class="bi bi-plus-square"></i>
-                         
-                          <span>Create New</span> 
-                        </button>
-                        <button
-                        class=" btn btn-primary dim btn-large-dim w-xs"
+        <section class="container pt-5">
+          <div class="pt-2 mt-30">
+            <div class="-30 pb-5">
+              <div class="card">
+                <div
+                  class="box-shadow bg-white rounded-circle mx-auto text-center"
+                  style="width: 130px; height: 130px; margin-top: -40px">
+                  <img src="assets/mets_logorm.png" class="img-fluid" alt="" />
+                </div>
+                <div class="card-body text-center">
+                  <h3 class="card-title">Mets 3D Warehouse</h3>
+
+                  <p class="card-text text-sm">
+                    Welcome to Editor Mets 3D Warehouse <br />Mapping and
+                    Maintenance of the Warehouse Contents
+                  </p>
+                  <div>
+                    <p class="d-inline-flex mx-auto">
+                      <button
+                        class="btn btn-primary dim btn-large-dim w-xs"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseInfo2"
+                        aria-expanded="false"
+                        aria-controls="collapseInfo2">
+                        <i class="bi bi-plus-square"></i>
+
+                        <span>Create New</span>
+                      </button>
+                      <button
+                        class="btn btn-primary dim btn-large-dim w-xs"
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#collapseInfo"
                         aria-expanded="false"
                         aria-controls="collapseInfo">
-                        
                         <i class="bi bi-pencil-square"></i>
-                       
-                        <span>Edit</span> 
+
+                        <span>Edit Mapping</span>
                       </button>
-                      </p>
+                    </p>
                   </div>
                 </div>
+              </div>
+            </div>
           </div>
-    </section>
-  </div>
-</main>
-<script>
-  $(document).ready(function(){
-      $(".fbtn").click(function(){
+        </section>
+        <div
+          class="collapse pb-5"
+          id="collapseInfo"
+          data-bs-parent="#collapseParent">
+          <div class="card card-body">
+            <div class="container">
+              <div class="row justify-content-evenly pb-3">
+                <div class="col-md-10 text-center p-2">
+                  <div class="big-title">
+                    <h5 class="big_title">Edit</h5>
+                  </div>
+                </div>
+                <div class="col-md-4 text-center">
+                  <select
+                    class="form-select"
+                    aria-label="Default select example">
+                    <option selected>Select</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                </div>
+                <div class="col-md-4 text-center">
+                  <select
+                    class="form-select"
+                    aria-label="Default select example">
+                    <option selected>Select</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                </div>
+                <div class="col-md-4 text-center">
+                  <select
+                    class="form-select"
+                    aria-label="Default select example">
+                    <option selected>Select</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                </div>
+                <div class="col-md-6 text-center pt-4">
+                  <button
+                    class="btn btn-primary dim btn-large-dim w-xs"
+                    type="button">
+                    <i class="bi bi-pencil-square"></i>
+
+                    <span>Edit</span>
+                  </button>
+                </div>
+              </div>
+              <!-- <hr />
+              <div class="row justify-content-evenly">
+                <div class="col-md-10 text-center p-2">
+                  <div class="big-title2">
+                    <h3 class="big_title2">PALLET LOCATION</h3>
+                  </div>
+                </div>
+                <div class="col-md-3 p-2 text-center">
+                  <div
+                    class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0">
+                    <i class="bi bi-align-start" style="font-size: 2.5rem"></i>
+                  </div>
+                  <p><small>ROW: 1</small></p>
+                </div>
+                <div class="col-md-3 p-2 text-center">
+                  <div
+                    class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0">
+                    <i
+                      class="bi bi-bar-chart-line-fill"
+                      style="font-size: 2.5rem"></i>
+                  </div>
+                  <p><small>LEVEL: 1</small></p>
+                </div>
+                <div class="col-md-3 p-2 text-center">
+                  <div
+                    class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0">
+                    <i class="bi bi-align-bottom" style="font-size: 2.5rem"></i>
+                  </div>
+                  <p><small>DEPTH: 4</small></p>
+                </div>
+              </div> -->
+              <!-- <hr />
+              <div class="row justify-content-evenly">
+                <div class="col-md-10 text-center p-2">
+                  <div class="big-title3">
+                    <h3 class="big_title3">PALLET COUNT</h3>
+                  </div>
+                </div>
+                <div class="col-md-5 text-center">
+                  <div
+                    class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0">
+                    <h6 style="font-size: 2rem" class="">1</h6>
+                  </div>
+                </div>
+                <div class="col-md-5 text-center">
+                  <div
+                    class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0">
+                    <h6 style="font-size: 2rem" class="">4</h6>
+                  </div>
+                </div>
+
+                <div class="col-md-5 text-center">
+                  <p><small>CURRENT</small></p>
+                </div>
+
+                <div class="col-md-5 text-center">
+                  <p><small>MAX</small></p>
+                </div>
+              </div> -->
+            </div>
+          </div>
+        </div>
+        <div
+          class="collapse pb-5"
+          id="collapseInfo2"
+          data-bs-parent="#collapseParent">
+          <div class="card card-body">
+            <div class="container">
+              <div class="row justify-content-evenly pb-3">
+                <div class="col-md-10 text-center">
+                  <div class="big-title">
+                    <h5 class="big_title pt-3">Rack Information</h5>
+                  </div>
+                </div>
+
+                <div class="col-md-9 p-1 text-center">
+                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+                  <label class="btn btn-outline-primary" for="btnradio1">Plant Code</label>
+                
+                  <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+                  <label class="btn btn-outline-primary" for="btnradio2">Room</label>
+                </div>
+                  
+
+                <div class="col-md-9 p-1 text-center">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Warehouse Code"
+                    aria-label="default input example" />
+                </div>
+                <div class="col-md-9 p-1 text-center">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Plant Code"
+                    aria-label="default input example" />
+                </div>
+                <div class="col-md-9 p-1 text-center">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Rack Number"
+                    aria-label="default input example" />
+                </div>
+                <div class="col-md-9 p-1 text-center">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Row Start"
+                    aria-label="default input example" />
+                </div>
+                <div class="col-md-9 p-1 text-center">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Row End"
+                    aria-label="default input example" />
+                </div>
+                <div class="col-md-9 p-1 text-center">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Level Count"
+                    aria-label="default input example" />
+                </div>
+                <div class="col-md-9 p-1 text-center">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Depth Count"
+                    aria-label="default input example" />
+                </div>
+
+                <div class="col-md-9 text-center pt-4">
+                  <button
+                    class="btn btn-primary dim btn-large-dim w-xs"
+                    type="button">
+                    <i class="bi bi-plus-square"></i>
+                    <span>Create</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Radio Group Button -->
+    <script>
+      $(".btn-toggle").click(function () {
+        $(this).find(".btn").toggleClass("active");
+
+        if ($(this).find(".btn-primary").size() > 0) {
+          $(this).find(".btn").toggleClass("btn-primary");
+        }
+        if ($(this).find(".btn-danger").size() > 0) {
+          $(this).find(".btn").toggleClass("btn-danger");
+        }
+        if ($(this).find(".btn-success").size() > 0) {
+          $(this).find(".btn").toggleClass("btn-success");
+        }
+        if ($(this).find(".btn-info").size() > 0) {
+          $(this).find(".btn").toggleClass("btn-info");
+        }
+
+        $(this).find(".btn").toggleClass("btn-default");
+      });
+    </script>
+    <script>
+      $(document).ready(function () {
+        $(".fbtn").click(function () {
           // Remove active class from all buttons
           $(".fbtn").removeClass("active");
           // Add active class to the clicked button
           $(this).toggleClass("active");
+        });
       });
-  });
-</script>
+    </script>
   </body>
 </html>

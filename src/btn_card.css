@@ -34,6 +34,21 @@ button.btn-primary.dim {
 button.btn-primary.dim:active {
   box-shadow: inset 0 0 0 #112074, 0 2px 0 0 #112074, 0 4px 3px #999999;
 }
+
+button.btn-success.dim {
+  box-shadow: inset 0 0 0 #05541d, 0 5px 0 0 #05541d, 0 7px 5px #999999;
+}
+button.btn-success.dim:active {
+  box-shadow: inset 0 0 0 #05541d, 0 2px 0 0 #05541d, 0 4px 3px #999999;
+}
+
+button.btn-danger.dim {
+  box-shadow: inset 0 0 0 #870808, 0 5px 0 0 #870808, 0 7px 5px #999999;
+}
+button.btn-danger.dim:active {
+  box-shadow: inset 0 0 0 #870808, 0 2px 0 0 #870808, 0 4px 3px #999999;
+}
+
 button.btn-default.dim {
   box-shadow: inset 0 0 0 #b3b3b3, 0 5px 0 0 #b3b3b3, 0 10px 5px #999999;
 }
@@ -60,11 +75,11 @@ button.dim:active:before {
   color: #fff;
 }
 .btn-primary {
-  background-color: #20468f;
-  border-color: #20468f;
+  background-color: #20468f !important;
+  border-color: #20468f !important;
   color: #ffffff;
 }
-.btn-primary:hover,
+/* .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active,
 .btn-primary.active,
@@ -81,8 +96,8 @@ button.dim:active:before {
 .btn-primary.active,
 .open .dropdown-toggle.btn-primary {
   background-image: none;
-}
-.btn-primary.disabled,
+} */
+/* .btn-primary.disabled,
 .btn-primary.disabled:hover,
 .btn-primary.disabled:focus,
 .btn-primary.disabled:active,
@@ -99,13 +114,61 @@ fieldset[disabled] .btn-primary:active,
 fieldset[disabled] .btn-primary.active {
   background-color: #1dc5a3;
   border-color: #1dc5a3;
+} */
+
+.btn-success.btn-outline:hover {
+  color: #fff;
 }
 .btn-success {
-  background-color: #1c84c6;
-  border-color: #1c84c6;
+  background-color: #198754 !important;
+  border-color: #198754 !important;
   color: #ffffff;
 }
+/* .btn-success:hover,
+.btn-success:focus,
+.btn-success:active,
+.btn-success.active,
+.open .dropdown-toggle.btn-success,
+.btn-success:active:focus,
+.btn-success:active:hover,
+.btn-success.active:hover,
+.btn-success.active:focus {
+  background-color: #1e8b25;
+  border-color: #1e8b25;
+  color: #ffffff;
+}
+.btn-success:active,
+.btn-success.active,
+.open .dropdown-toggle.btn-success {
+  background-image: none;
+} */
+/* .btn-success.disabled,
+.btn-success.disabled:hover,
+.btn-success.disabled:focus,
+.btn-success.disabled:active,
+.btn-success.disabled.active,
+.btn-success[disabled],
+.btn-success[disabled]:hover,
+.btn-success[disabled]:focus,
+.btn-success[disabled]:active,
+.btn-success.active[disabled],
+fieldset[disabled] .btn-success,
+fieldset[disabled] .btn-success:hover,
+fieldset[disabled] .btn-success:focus,
+fieldset[disabled] .btn-success:active,
+fieldset[disabled] .btn-success.active {
+  background-color: #1dc5a3;
+  border-color: #1dc5a3;
+} */
 
+.btn-danger.btn-outline:hover {
+  color: #fff;
+}
+.btn-danger {
+  background-color: #dc3545 !important;
+  border-color: #dc3545 !important;
+  color: #ffffff;
+}
 .card::after {
   display: block;
   position: absolute;
@@ -215,4 +278,45 @@ p,
 .head-icon {
   margin-top: 18px;
   color: #ff4500;
+}
+
+.btn-gbtn {
+  width: 180px;
+}
+/* Default state (not clicked) */
+.btn-gbtn.dim {
+  background-color: #20468f; /* Dark blue */
+  color: white; /* White text */
+  border: 1px solid #20468f;
+}
+
+/* Change color when the radio button is checked */
+.btn-check:checked + .btn-gbtn.dim {
+  background-color: #fd5f1f; /* Orange */
+  color: white; /* White text */
+  border: 1px solid #fd5f1f;
+}
+
+/* Override Bootstrap hover effect */
+.btn-gbtn.dim:hover,
+.btn-gbtn.dim:focus {
+  background-color: #3059a5; /* Keep dark blue on hover/focus */
+  border-color: #3059a5;
+  color: white;
+}
+
+/* Keep orange color on hover/focus for checked state */
+.btn-check:checked + .btn-gbtn.dim:hover,
+.btn-check:checked + .btn-gbtn.dim:focus {
+  background-color: #f87440; /* Keep orange on hover/focus */
+  border-color: #f87440;
+  color: white;
+}
+
+.ibtn {
+  color: #fd5f1f !important;
+}
+
+.accordion-button:focus {
+  box-shadow: none;
 }

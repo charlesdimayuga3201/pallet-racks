@@ -1,7 +1,7 @@
 .big-title {
   margin-bottom: 1em;
 }
-h3.big_title {
+h4.big_title {
   font-size: 1.1em;
   color: #212121;
   text-transform: uppercase;
@@ -16,7 +16,7 @@ p.title-para {
   letter-spacing: 8px;
 }
 
-h3.big_title:after {
+h4.big_title:after {
   content: "";
   background: #0066b2;
   height: 6px;
@@ -26,7 +26,7 @@ h3.big_title:after {
   top: 46%;
   left: -8%;
 }
-h3.big_title:before {
+h4.big_title:before {
   content: "";
   background: #0066b2;
   height: 6px;
@@ -43,7 +43,7 @@ h3.big_title:before {
 .big-title2 {
   margin-bottom: 1em;
 }
-h3.big_title2 {
+h4.big_title2 {
   font-size: 1.1em;
   color: #212121;
   text-transform: uppercase;
@@ -58,7 +58,7 @@ p.title-para2 {
   letter-spacing: 8px;
 }
 
-h3.big_title2:after {
+h4.big_title2:after {
   content: "";
   background: #0066b2;
   height: 6px;
@@ -69,7 +69,7 @@ h3.big_title2:after {
   left: -8%;
 }
 
-h3.big_title2:before {
+h4.big_title2:before {
   content: "";
   background: #0066b2;
   height: 6px;
@@ -86,7 +86,7 @@ h3.big_title2:before {
 .big-title3 {
   margin-bottom: 1em;
 }
-h3.big_title3 {
+h4.big_title3 {
   font-size: 1.1em;
   color: #212121;
   text-transform: uppercase;
@@ -101,7 +101,7 @@ p.title-para3 {
   letter-spacing: 8px;
 }
 
-h3.big_title3:after {
+h4.big_title3:after {
   content: "";
   background: #0066b2;
   height: 6px;
@@ -112,7 +112,7 @@ h3.big_title3:after {
   left: -8%;
 }
 
-h3.big_title3:before {
+h4.big_title3:before {
   content: "";
   background: #0066b2;
   height: 6px;

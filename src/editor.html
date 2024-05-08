@@ -24,7 +24,7 @@
         }
       }
     </script>
-
+    <link rel="stylesheet" href="input.css" />
     <link rel="stylesheet" href="dropdown.css" />
     <link rel="stylesheet" href="title.css" />
     <link rel="stylesheet" href="tool.css" />
@@ -46,14 +46,20 @@
     <li><a href="" role="button" class="nav-link scrollto"><button class="fbtn btn"><i class="bi bi-eraser"></i><span>Eraser</span></a></button></li>
     <li><a href="" role="button" class="nav-link scrollto"><button class="fbtn btn"><i class="bi bi-arrow-clockwise"></i><span>Reset Camera View</span></a></button></li>
   </ul> -->
-          <ul>
+          <ul id="buttonList">
             <li>
-              <button id="viewBtn" class="fbtn btn" data-bs-toggle="button">
+              <button
+                id="viewBtn"
+                class="fbtn btn rmBtn"
+                data-bs-toggle="button">
                 <i class="bi bi-mouse"></i> <span>Free View</span>
               </button>
             </li>
             <li>
-              <button id="wallBtn" class="fbtn btn" data-bs-toggle="button">
+              <button
+                id="wallBtn"
+                class="fbtn btn rmBtn"
+                data-bs-toggle="button">
                 <i class="bi bi-bricks"></i> <span>Wall Creation</span>
               </button>
             </li>
@@ -62,34 +68,20 @@
                 <i class="bi bi-hdd-rack"></i> <span>Rack Configuration</span>
               </button>
             </li>
+
             <li>
-              <button id="escapeBtn" class="fbtn btn" data-bs-toggle="button">
-                <i class="bi bi-escape"></i> <span>Escape</span>
-              </button>
-            </li>
-            <li>
-              <button id="rowsBtn" class="fbtn btn" data-bs-toggle="button">
-                <i class="bi bi-arrows-expand-vertical"></i
-                ><span>Select Rows</span>
-              </button>
-            </li>
-            <li>
-              <button id="saveBtn" class="fbtn btn" data-bs-toggle="button">
-                <i class="bi bi-save"></i> <span>Save Project</span>
-              </button>
-            </li>
-            <li>
-              <button id="openBtn" class="fbtn btn" data-bs-toggle="button">
-                <i class="bi bi-folder2-open"></i> <span>Open Project</span>
-              </button>
-            </li>
-            <li>
-              <button id="eraserBtn" class="fbtn btn" data-bs-toggle="button">
+              <button
+                id="eraserBtn"
+                class="fbtn btn rmBtn"
+                data-bs-toggle="button">
                 <i class="bi bi-eraser"></i><span>Eraser</span>
               </button>
             </li>
             <li>
-              <button id="resetBtn" class="fbtn btn" data-bs-toggle="button">
+              <button
+                id="resetBtn"
+                class="fbtn btn rmBtn"
+                data-bs-toggle="button">
                 <i class="bi bi-arrow-clockwise"></i
                 ><span>Reset Camera View</span>
               </button>
@@ -98,6 +90,7 @@
         </nav>
       </header>
     </main>
+
     <main class="d-flex flex-row-reverse">
       <div
         id="collapseParent"
@@ -121,28 +114,71 @@
                   </p>
                   <div>
                     <p class="d-inline-flex mx-auto">
-                      <button
-                        class="btn btn-primary dim btn-large-dim w-xs"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapseInfo2"
-                        aria-expanded="false"
-                        aria-controls="collapseInfo2">
-                        <i class="bi bi-plus-square"></i>
+                      <span id="createButton">
+                        <button
+                          class="btn btn-primary dim btn-large-dim w-xs"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#collapseInfo2"
+                          aria-expanded="false"
+                          aria-controls="collapseInfo2">
+                          <i class="bi bi-plus-square"></i>
 
-                        <span>Create New</span>
-                      </button>
-                      <button
-                        class="btn btn-primary dim btn-large-dim w-xs"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapseInfo"
-                        aria-expanded="false"
-                        aria-controls="collapseInfo">
-                        <i class="bi bi-pencil-square"></i>
+                          <span>Create New</span>
+                        </button>
+                      </span>
 
-                        <span>Edit Mapping</span>
-                      </button>
+                      <span id="editMButton">
+                        <button
+                          class="btn btn-primary dim btn-large-dim w-xs"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#collapseInfo"
+                          aria-expanded="false"
+                          aria-controls="collapseInfo">
+                          <i class="bi bi-pencil-square"></i>
+
+                          <span>Edit Mapping</span>
+                        </button>
+                      </span>
+
+                      <span class="d-none" id="E-saveButton">
+                        <button
+                          class="btn btn-success dim btn-large-dim w-xs"
+                          type="button">
+                          <i class="bi bi-floppy"></i>
+
+                          <span>Save</span>
+                        </button>
+                      </span>
+                      <span class="d-none" id="E-cancelButton">
+                        <button
+                          class="btn btn-danger dim btn-large-dim w-xs"
+                          type="button">
+                          <i class="bi bi-x-lg"></i>
+
+                          <span>Cancel</span>
+                        </button>
+                      </span>
+
+                      <span class="d-none" id="C-saveButton">
+                        <button
+                          class="btn btn-success dim btn-large-dim w-xs"
+                          type="button">
+                          <i class="bi bi-floppy"></i>
+
+                          <span>Save</span>
+                        </button>
+                      </span>
+                      <span class="d-none" id="C-cancelButton">
+                        <button
+                          class="btn btn-danger dim btn-large-dim w-xs"
+                          type="button">
+                          <i class="bi bi-x-lg"></i>
+
+                          <span>Cancel</span>
+                        </button>
+                      </span>
                     </p>
                   </div>
                 </div>
@@ -156,7 +192,7 @@
           data-bs-parent="#collapseParent">
           <div class="card card-body">
             <div class="container">
-              <div class="row justify-content-evenly pb-3">
+              <div class="selection-mapping row justify-content-evenly pb-3">
                 <div class="col-md-10 text-center p-2">
                   <div class="big-title">
                     <h5 class="big_title">Edit Warehouse</h5>
@@ -165,7 +201,8 @@
                 <div class="col-md-4 text-center">
                   <select
                     class="form-select"
-                    aria-label="Default select example">
+                    aria-label="Default select example"
+                    id="select1">
                     <option selected>Select</option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
@@ -175,7 +212,8 @@
                 <div class="col-md-4 text-center">
                   <select
                     class="form-select"
-                    aria-label="Default select example">
+                    aria-label="Default select example"
+                    id="select2">
                     <option selected>Select</option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
@@ -185,14 +223,15 @@
                 <div class="col-md-4 text-center">
                   <select
                     class="form-select"
-                    aria-label="Default select example">
+                    aria-label="Default select example"
+                    id="select3">
                     <option selected>Select</option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
                     <option value="3">Three</option>
                   </select>
                 </div>
-                <div class="col-md-12 text-center pt-4" id="editButton">
+                <div class="col-md-6 text-center pt-4" id="editButton">
                   <button
                     class="btn btn-primary dim btn-large-dim w-xs"
                     type="button">
@@ -201,84 +240,15 @@
                     <span>Edit</span>
                   </button>
                 </div>
-                <div class="col-md-6 text-center pt-4 d-none" id="saveButton">
-                  <button
-                    class="btn btn-success dim btn-large-dim w-xs"
-                    type="button">
-                    <i class="bi bi-floppy"></i>
-
-                    <span>Save</span>
-                  </button>
-                </div>
-                <div class="col-md-6 text-center pt-4 d-none" id="cancelButton">
+                <div class="col-md-6 text-center pt-4 d-none" id="mapCancel">
                   <button
                     class="btn btn-danger dim btn-large-dim w-xs"
                     type="button">
                     <i class="bi bi-x-lg"></i>
-
                     <span>Cancel</span>
                   </button>
                 </div>
               </div>
-              <!-- <hr />
-              <div class="row justify-content-evenly">
-                <div class="col-md-10 text-center p-2">
-                  <div class="big-title2">
-                    <h3 class="big_title2">PALLET LOCATION</h3>
-                  </div>
-                </div>
-                <div class="col-md-3 p-2 text-center">
-                  <div
-                    class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0">
-                    <i class="bi bi-align-start" style="font-size: 2.5rem"></i>
-                  </div>
-                  <p><small>ROW: 1</small></p>
-                </div>
-                <div class="col-md-3 p-2 text-center">
-                  <div
-                    class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0">
-                    <i
-                      class="bi bi-bar-chart-line-fill"
-                      style="font-size: 2.5rem"></i>
-                  </div>
-                  <p><small>LEVEL: 1</small></p>
-                </div>
-                <div class="col-md-3 p-2 text-center">
-                  <div
-                    class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0">
-                    <i class="bi bi-align-bottom" style="font-size: 2.5rem"></i>
-                  </div>
-                  <p><small>DEPTH: 4</small></p>
-                </div>
-              </div> -->
-              <!-- <hr />
-              <div class="row justify-content-evenly">
-                <div class="col-md-10 text-center p-2">
-                  <div class="big-title3">
-                    <h3 class="big_title3">PALLET COUNT</h3>
-                  </div>
-                </div>
-                <div class="col-md-5 text-center">
-                  <div
-                    class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0">
-                    <h6 style="font-size: 2rem" class="">1</h6>
-                  </div>
-                </div>
-                <div class="col-md-5 text-center">
-                  <div
-                    class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0">
-                    <h6 style="font-size: 2rem" class="">4</h6>
-                  </div>
-                </div>
-
-                <div class="col-md-5 text-center">
-                  <p><small>CURRENT</small></p>
-                </div>
-
-                <div class="col-md-5 text-center">
-                  <p><small>MAX</small></p>
-                </div>
-              </div> -->
             </div>
           </div>
         </div>
@@ -288,16 +258,17 @@
           data-bs-parent="#collapseParent">
           <div class="card card-body">
             <div class="container">
-              <div class="row justify-content-evenly pb-3">
+              <div class="create-contents row justify-content-evenly pb-3">
                 <div class="col-md-10 text-center">
                   <div class="big-title">
-                    <h5 class="big_title pt-3">Rack Information</h5>
+                    <h5 class="big_title pt-3">Warehouse Information</h5>
                   </div>
                 </div>
 
                 <div class="col-md-12 p-1 pb-2 text-center">
                   <div
                     class="btn-group"
+                    id="storage-selection"
                     role="group"
                     aria-label="Basic radio toggle button group">
                     <input
@@ -308,7 +279,7 @@
                       autocomplete="off"
                       checked />
                     <label class="btn btn-gbtn dim" for="btnradio1"
-                      >Warehouse</label
+                      >Plant</label
                     >
 
                     <input
@@ -324,148 +295,138 @@
                 </div>
                 <div class="col-md-6 text-center p-2 pb-3">
                   <select
-                    class="form-select p-2"
+                    class="form-select p-2 form-control form-control-alternative"
+                    id="storage-type"
                     aria-label="Default select example">
                     <option selected>Select</option>
-                    <option value="1">Cold Storage</option>
-                    <option value="2">Dry Storage</option>
+                    <option value="Cold">Cold Storage</option>
+                    <option value="Dry">Dry Storage</option>
                   </select>
                 </div>
                 <!-- warehouse -->
                 <div class="col-md-10 text-center" id="warehouse">
                   <input
-                    class="form-control p-2"
+                    class="form-control p-2 form-control form-control-alternative"
                     type="text"
+                    id="code-w"
                     placeholder="Warehouse Code"
                     aria-label="default input example" />
 
                   <input
-                    class="form-control p-2 mt-2"
+                    class="form-control p-2 mt-2 form-control form-control-alternative"
                     type="text"
+                    id="code-p"
                     placeholder="Plant Code"
                     aria-label="default input example" />
-
-                  <input
-                    class="form-control p-2 mt-2"
-                    type="text"
-                    placeholder="Rack Number"
-                    aria-label="default input example" />
-
-                  <input
-                    class="form-control p-2 mt-2"
-                    type="text"
-                    placeholder="Row Start"
-                    aria-label="default input example" />
-
-                  <input
-                    class="form-control p-2 mt-2"
-                    type="text"
-                    placeholder="Row End"
-                    aria-label="default input example" />
-
-                  <input
-                    class="form-control p-2 mt-2"
-                    type="text"
-                    placeholder="Level Count"
-                    aria-label="default input example" />
-
-                  <input
-                    class="form-control p-2 mt-2"
-                    type="text"
-                    placeholder="Depth Count"
-                    aria-label="default input example" />
-
-                  <select
-                    class="form-select p-2 mt-2"
-                    aria-label="Default select example">
-                    <option selected>Select Orientation</option>
-                    <option value="1">Vertical</option>
-                    <option value="2">Horizontal</option>
-                  </select>
-
-                  <select
-                    class="form-select p-2 mt-2"
-                    aria-label="Default select example">
-                    <option selected>Choose....</option>
-                    <option value="1">Left</option>
-                    <option value="2">Right</option>
-                  </select>
                 </div>
-                <!-- warehouse -->
-                <!-- room -->
-                <div class="col-md-10 text-center" id="room">
-                  <input
-                    class="form-control p-2"
-                    type="text"
-                    placeholder="Warehouse Code"
-                    aria-label="default input example" />
 
-                  <input
-                    class="form-control p-2 mt-2"
-                    type="text"
-                    placeholder="Plant Code"
-                    aria-label="default input example" />
-
-                  <input
-                    class="form-control p-2 mt-2"
-                    type="text"
-                    placeholder="Room Number"
-                    aria-label="default input example" />
-
-                  <input
-                    class="form-control p-2 mt-2"
-                    type="text"
-                    placeholder="Side"
-                    aria-label="default input example" />
-
-                  <input
-                    class="form-control p-2 mt-2"
-                    type="text"
-                    placeholder="Row Start"
-                    aria-label="default input example" />
-
-                  <input
-                    class="form-control p-2 mt-2"
-                    type="text"
-                    placeholder="Row End"
-                    aria-label="default input example" />
-
-                  <input
-                    class="form-control p-2 mt-2"
-                    type="text"
-                    placeholder="Level Count"
-                    aria-label="default input example" />
-
-                  <input
-                    class="form-control p-2 mt-2"
-                    type="text"
-                    placeholder="Depth Count"
-                    aria-label="default input example" />
-
-                  <select
-                    class="form-select p-2 mt-2"
-                    aria-label="Default select example">
-                    <option selected>Select Orientation</option>
-                    <option value="1">Vertical</option>
-                    <option value="2">Horizontal</option>
-                  </select>
-
-                  <select
-                    class="form-select p-2 mt-2"
-                    aria-label="Default select example">
-                    <option selected>Select</option>
-                    <option value="1">Left</option>
-                    <option value="2">Right</option>
-                  </select>
+                <div class="col-md-12 text-center pt-4" id="doneButton">
+                  <button
+                    class="btn btn-primary dim btn-large-dim w-xs"
+                    type="button">
+                    <i class="bi bi-plus-square"></i>
+                    <span>Done</span>
+                  </button>
                 </div>
-                <!-- room -->
-                <div class="col-md-9 text-center pt-4">
+                <div class="col-md-6 text-center pt-4 d-none" id="createBtn">
                   <button
                     class="btn btn-primary dim btn-large-dim w-xs"
                     type="button">
                     <i class="bi bi-plus-square"></i>
                     <span>Create</span>
                   </button>
+                </div>
+                <div class="col-md-6 text-center pt-4 d-none" id="cancelBtn">
+                  <button
+                    class="btn btn-danger dim btn-large-dim w-xs"
+                    type="button">
+                    <i class="bi bi-x-lg"></i>
+                    <span>Cancel</span>
+                  </button>
+                </div>
+                <!-- room -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pb-5 d-none" id="rack-config">
+          <div class="card card-body">
+            <div class="container">
+              <div class="create-contents row justify-content-evenly pb-3">
+                <div class="col-md-10 text-center">
+                  <div class="big-title">
+                    <h5 class="big_title pt-3">Rack Configuration</h5>
+                  </div>
+                  <input
+                    id="rack-number"
+                    class="form-control p-2 mt-2 form-control form-control-alternative"
+                    type="text"
+                    placeholder="Rack Number"
+                    aria-label="default input example" />
+                  <input
+                    id="room-number"
+                    class="form-control p-2 mt-2 form-control form-control-alternative"
+                    type="text"
+                    placeholder="Room Number"
+                    aria-label="default input example" />
+
+                  <input
+                    id="side"
+                    class="form-control p-2 mt-2 form-control form-control-alternative"
+                    type="text"
+                    placeholder="Side"
+                    aria-label="default input example" />
+                  <input
+                    class="form-control p-2 mt-2 form-control form-control-alternative"
+                    type="text"
+                    placeholder="Row Start"
+                    aria-label="default input example" />
+
+                  <input
+                    class="form-control p-2 mt-2 form-control form-control-alternative"
+                    type="text"
+                    placeholder="Row End"
+                    aria-label="default input example" />
+
+                  <input
+                    class="form-control p-2 mt-2 form-control form-control-alternative"
+                    type="text"
+                    placeholder="Level Count"
+                    aria-label="default input example" />
+
+                  <input
+                    class="form-control p-2 mt-2 form-control form-control-alternative"
+                    type="text"
+                    placeholder="Depth Count"
+                    aria-label="default input example" />
+
+                  <select
+                    id="orientationSelect-1"
+                    class="form-select p-2 mt-2 form-control form-control-alternative"
+                    aria-label="Default select example">
+                    <option selected>Select Orientation</option>
+                    <option value="vertical">Vertical</option>
+                    <option value="horizontal">Horizontal</option>
+                  </select>
+
+                  <select
+                    id="positionSelect-1"
+                    class="form-select p-2 mt-2 form-control form-control-alternative"
+                    aria-label="Default select example">
+                    <option selected>Choose...</option>
+                    <option class="vertical-select-1 d-none" value="top">
+                      Top
+                    </option>
+                    <option class="vertical-select-1 d-none" value="bottom">
+                      Bottom
+                    </option>
+                    <option class="horizontal-select-1 d-none" value="left">
+                      Left
+                    </option>
+                    <option class="horizontal-select-1 d-none" value="right">
+                      Right
+                    </option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -474,7 +435,7 @@
       </div>
     </main>
     <!-- Radio Group Button -->
-    <script>
+    <!-- <script>
       $(".btn-toggle").click(function () {
         $(this).find(".btn").toggleClass("active");
 
@@ -493,8 +454,8 @@
 
         $(this).find(".btn").toggleClass("btn-default");
       });
-    </script>
-    <script>
+    </script> -->
+    <!-- <script>
       $(document).ready(function () {
         $(".fbtn").click(function () {
           // Remove active class from all buttons
@@ -503,44 +464,77 @@
           $(this).toggleClass("active");
         });
       });
-    </script>
-    <!-- Warehouse & room -->
+    </script> -->
     <script>
       $(document).ready(function () {
-        // Get references to the radio buttons
-        var warehouseBtn = $("#btnradio1");
-        var roomBtn = $("#btnradio2");
+        $(".fbtn").click(function () {
+          // $(this).toggleClass("active");
 
-        // Get references to the sections
-        var warehouseSection = $("#warehouse");
-        var roomSection = $("#room");
-
-        // Function to show or hide sections
-        function toggleVisibility() {
-          if (warehouseBtn.prop("checked")) {
-            warehouseSection.show();
-            roomSection.hide();
-          } else if (roomBtn.prop("checked")) {
-            warehouseSection.hide();
-            roomSection.show();
+          if ($(this).hasClass("active")) {
+            $(".fbtn").not(this).removeClass("active");
           }
-        }
-
-        warehouseBtn.change(toggleVisibility);
-        roomBtn.change(toggleVisibility);
-
-        toggleVisibility();
+          if ($("#resetBtn")) {
+            $("#resetBtn").removeClass("active");
+          }
+        });
       });
     </script>
     <script>
       $(document).ready(function () {
-        $("#editButton").on("click", "button", function () {
-          $("#editButton").addClass("d-none");
+        // Handle clicks on all buttons except the reset button
+        $(".fbtn")
+          .not("#resetBtn")
+          .click(function () {
+            // Remove active class from all buttons
+            $(".fbtn").removeClass("active");
+            // Add active class to the clicked button
+            $(this).toggleClass("active");
+          });
 
-          $("#saveButton, #cancelButton").removeClass("d-none");
+        // Specific handler for the reset button
+        $("#resetBtn").click(function () {
+          // Perform the reset camera view operation here
+          resetCameraView();
         });
 
-        $("#saveButton").on("click", "button", function () {
+        // Function to reset the camera view
+        function resetCameraView() {
+          console.log("Camera view has been reset.");
+          // Additional logic to reset the camera can be added here
+        }
+      });
+    </script>
+
+    <script>
+      $(document).ready(function () {
+        $("#buttonList button").prop("disabled", true);
+        $("#editButton button").prop("disabled", true);
+        $("#editMButton").on("click", "button", function () {
+          $("#buttonList").find(".btn").removeClass("active");
+          $("#buttonList button").prop("disabled", true);
+          $("#rack-config").addClass("d-none");
+        });
+
+        $("#doneButton").on("click", "button", function () {
+          // $("#buttonList").find(".btn").removeClass("active");
+          $("#buttonList button").prop("disabled", false);
+        });
+      });
+    </script>
+    <!-- Edit Button in Editor -->
+    <script>
+      $(document).ready(function () {
+        $("#editButton").on("click", "button", function () {
+          $("#editButton,#editMButton,#createButton,#mapCancel").addClass(
+            "d-none"
+          );
+          $(".selection-mapping select").prop("disabled", true);
+          $("#rack-config ").addClass("d-none");
+          $("#buttonList").find(".btn").removeClass("active");
+          $("#E-saveButton, #E-cancelButton").removeClass("d-none");
+        });
+
+        $("#E-saveButton").on("click", "button", function () {
           // $(".fbtn.btn").prop("disabled", true);
           // $("#header").addClass("d-none");
           Swal.fire({
@@ -563,20 +557,297 @@
                 confirmButtonColor: "#3085d6",
                 allowOutsideClick: false,
               });
-              $("#editButton").removeClass("d-none");
-              $("#saveButton, #cancelButton").addClass("d-none");
-            } else {
             }
+
+            $("#editButton,#editMButton,#createButton,#mapCancel").removeClass(
+              "d-none"
+            );
+            $("#E-saveButton, #E-cancelButton").addClass("d-none");
+            $(".selection-mapping select").prop("disabled", false);
+            $(".selection-mapping select").prop("disabled", false);
             // $("#header").removeClass("d-none");
           });
         });
 
-        $("#cancelButton").on("click", "button", function () {
-          $("#saveButton, #cancelButton ").addClass("d-none");
-
-          $("#editButton").removeClass("d-none");
+        $("#E-cancelButton").on("click", "button", function () {
+          $("#E-saveButton, #E-cancelButton ").addClass("d-none");
+          $(".selection-mapping select").prop("disabled", false);
+          $("#editButton,#editMButton,#createButton,#mapCancel").removeClass(
+            "d-none"
+          );
         });
       });
     </script>
+    <!-- Edit Button in Editor -->
+
+    <script>
+      $(document).ready(function () {
+        $("#rackBtn").on("click", function () {
+          $("#rack-config").removeClass("d-none");
+        });
+
+        $(".rmBtn").on("click", function () {
+          $("#rack-config").addClass("d-none");
+        });
+      });
+    </script>
+    <!-- <script>
+      document
+        .getElementById("eraserBtn")
+        .addEventListener("click", function () {
+          document.body.classList.toggle("eraser-cursor");
+        });
+    </script> -->
+    <!-- select dropdown -->
+    <script>
+      $(document).ready(function () {
+        $("#orientationSelect-1").change(function () {
+          var orientation = $(this).val();
+
+          // $("#positionSelect option").addClass("d-none");
+          $(".vertical-select-1").addClass("d-none");
+          $(".horizontal-select-1").addClass("d-none");
+          if (orientation === "vertical") {
+            $(".vertical-select-1").removeClass("d-none");
+          } else if (orientation === "horizontal") {
+            $(".horizontal-select-1").removeClass("d-none");
+          } else {
+            $("#positionSelect-1").val("Choose...");
+          }
+        });
+      });
+      $(document).ready(function () {
+        $("#orientationSelect-2").change(function () {
+          var orientation = $(this).val();
+
+          // $("#positionSelect option").addClass("d-none");
+          $(".vertical-select-2").addClass("d-none");
+          $(".horizontal-select-2").addClass("d-none");
+          if (orientation === "vertical") {
+            $(".vertical-select-2").removeClass("d-none");
+          } else if (orientation === "horizontal") {
+            $(".horizontal-select-2").removeClass("d-none");
+          } else {
+            $("#positionSelect-2").val("Choose...");
+          }
+        });
+      });
+    </script>
+
+    <script>
+      $(document).ready(function () {
+        const $select1 = $("#select1");
+        const $select2 = $("#select2");
+        const $select3 = $("#select3");
+        const $editBtn = $("#editButton button");
+
+        // Function to check if any select dropdown has no value
+        function checkDropdowns() {
+          if (
+            $select1.val() === "Select" &&
+            $select2.val() === "Select" &&
+            $select3.val() === "Select"
+          ) {
+            $("#createButton button ").prop("disabled", false);
+            $("#rack-config ").addClass("d-none");
+            $("#buttonList").find(".btn").removeClass("active");
+            $editBtn.prop("disabled", true); // Disable the button
+          } else if (
+            $select1.val() !== "Select" &&
+            $select2.val() !== "Select" &&
+            $select3.val() !== "Select"
+          ) {
+            $("#buttonList button").prop("disabled", false);
+            $("#mapCancel").removeClass("d-none");
+            $editBtn.prop("disabled", false);
+          } else {
+            // $("#mapCancel").removeClass("d-none");
+
+            $("#createButton button ").prop("disabled", true);
+            // Enable the button
+          }
+        }
+
+        // Call the function when any select dropdown value changes
+        $select1.on("change", checkDropdowns);
+        $select2.on("change", checkDropdowns);
+        $select3.on("change", checkDropdowns);
+
+        $("#mapCancel").on("click", "button", function () {
+          $("#mapCancel").addClass("d-none");
+          $("#editButton button").prop("disabled", true);
+          $("#buttonList button").prop("disabled", false);
+          $("#createButton button ").prop("disabled", false);
+          $("#buttonList").find(".btn").removeClass("active");
+          $("#buttonList button").prop("disabled", true);
+          $("#rack-config ").addClass("d-none");
+
+          $select1.val("Select");
+          $select2.val("Select");
+          $select3.val("Select");
+        });
+      });
+    </script>
+    <script>
+      $(document).ready(function () {
+        $("#createButton").on("click", "button", function () {
+          $("#doneButton button").prop("disabled", true);
+        });
+      });
+    </script>
+
+    <!-- Create in Viewer Input Buttons Select Behaviour -->
+    <script>
+      $(document).ready(function () {
+        const storage = $("#storage-type");
+        const codeW = $("#code-w");
+        const codeP = $("#code-p");
+        const doneButton = $("#doneButton button");
+
+        function updateControls() {
+          // Check if select or any input is empty
+          if (
+            storage.val() !== "Select" &&
+            codeW.val() !== "" &&
+            codeP.val() !== ""
+          ) {
+            doneButton.prop("disabled", false);
+
+            $("#doneButton").on("click", "button", function () {
+              storage.prop("disabled", true);
+              codeW.prop("disabled", true);
+              codeP.prop("disabled", true);
+              $("#storage-selection input").prop("disabled", true);
+              $("#editMButton button").prop("disabled", true);
+              $("#doneButton").addClass("d-none");
+              $("#createBtn").removeClass("d-none");
+              $("#cancelBtn").removeClass("d-none");
+            });
+            $("#cancelBtn").on("click", "button", function () {
+              $("#buttonList").find(".btn").removeClass("active");
+              $("#buttonList button").prop("disabled", true);
+              $("#rack-config").addClass("d-none");
+              $("#doneButton").removeClass("d-none");
+              $("#createBtn").addClass("d-none");
+              $("#cancelBtn").addClass("d-none");
+              $("#editMButton button").prop("disabled", false);
+              $("#doneButton button").prop("disabled", true);
+              $("#storage-selection input").prop("disabled", false);
+              storage.prop("disabled", false);
+              codeW.prop("disabled", false);
+              codeP.prop("disabled", false);
+              storage.val("Select");
+              codeW.val("");
+              codeP.val("");
+            });
+
+            $("#createBtn").on("click", "button", function () {
+              $("#buttonList").find(".btn").removeClass("active");
+              $("#buttonList button").prop("disabled", true);
+              $("#rack-config").addClass("d-none");
+              $("#createBtn,#editMButton,#createButton").addClass("d-none");
+              $("html").scrollTop(0);
+              // $(".create-contents select,input").prop("disabled", true);
+              $("#C-saveButton, #C-cancelButton").removeClass("d-none");
+              $("#cancelBtn").addClass("d-none");
+            });
+
+            $("#C-saveButton").on("click", "button", function () {
+              // $(".fbtn.btn").prop("disabled", true);
+              // $("#header").addClass("d-none");
+
+              Swal.fire({
+                title: "Are you sure?",
+                text: "You want to save?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#198754",
+                cancelButtonColor: "#dc3545",
+                confirmButtonText: "Yes, save it!",
+                // backdrop: false,
+                allowOutsideClick: false,
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  Swal.fire({
+                    title: "Saved!",
+                    text: "Your mapping has been saved.",
+                    icon: "success",
+                    // backdrop: false,
+                    confirmButtonColor: "#3085d6",
+                    allowOutsideClick: false,
+                  });
+                  $("#buttonList").find(".btn").removeClass("active");
+                  $("#buttonList button").prop("disabled", true);
+                  $("#rack-config").addClass("d-none");
+                  $("#editMButton,#createButton,#doneButton").removeClass(
+                    "d-none"
+                  );
+                  $("#C-saveButton, #C-cancelButton,#createBtn").addClass(
+                    "d-none"
+                  );
+                  $("#editMButton button").prop("disabled", false);
+                  $("#doneButton button").prop("disabled", true);
+                  $("#storage-selection input").prop("disabled", false);
+                  storage.prop("disabled", false);
+                  codeW.prop("disabled", false);
+                  codeP.prop("disabled", false);
+                  storage.val("Select");
+                  codeW.val("");
+                  codeP.val("");
+                } else {
+                }
+                // $("#header").removeClass("d-none");
+              });
+            });
+
+            $("#C-cancelButton").on("click", "button", function () {
+              $("#buttonList button").prop("disabled", false);
+              $("#rack-config").addClass("d-none");
+              $("#C-saveButton, #C-cancelButton ").addClass("d-none");
+              $("#cancelBtn").removeClass("d-none");
+              // $(".create-contents select,input").prop("disabled", false);
+              $("#createBtn,#editMButton,#createButton").removeClass("d-none");
+            });
+          }
+          // else {
+          //   doneButton.prop("disabled", false);
+          //   storage.prop("disabled", true);
+          //   codeW.prop("disabled", true);
+          //   codeP.prop("disabled", true);
+          // }
+        }
+
+        // Attach change event listeners to inputs and select
+        storage.change(updateControls);
+        codeW.keyup(updateControls);
+        codeP.keyup(updateControls);
+      });
+    </script>
+
+    <!-- Warehouse & room -->
+    <script>
+      $(document).ready(function () {
+        var warehouseBtn = $("#btnradio1");
+        var roomBtn = $("#btnradio2");
+
+        function toggleVisibility() {
+          if (warehouseBtn.prop("checked")) {
+            $("#room-number").addClass("d-none");
+            $("#side").addClass("d-none");
+            $("#rack-number").removeClass("d-none");
+          } else if (roomBtn.prop("checked")) {
+            $("#rack-number").addClass("d-none");
+            $("#room-number").removeClass("d-none");
+            $("#side").removeClass("d-none");
+          }
+        }
+
+        warehouseBtn.change(toggleVisibility);
+        roomBtn.change(toggleVisibility);
+
+        toggleVisibility();
+      });
+    </script>
+    <!-- Warehouse & room -->
   </body>
 </html>

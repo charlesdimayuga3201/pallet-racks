@@ -651,12 +651,14 @@
             $("#createButton button ").prop("disabled", false);
             $("#rack-config ").addClass("d-none");
             $("#buttonList").find(".btn").removeClass("active");
+
             $editBtn.prop("disabled", true); // Disable the button
           } else if (
             $select1.val() !== "Select" &&
             $select2.val() !== "Select" &&
             $select3.val() !== "Select"
           ) {
+            $(".fbtn").addClass("fbtn-trigger");
             $("#buttonList button").prop("disabled", false);
             $("#mapCancel").removeClass("d-none");
             $editBtn.prop("disabled", false);
@@ -714,6 +716,7 @@
             doneButton.prop("disabled", false);
 
             $("#doneButton").on("click", "button", function () {
+              $(".fbtn").addClass("fbtn-trigger");
               storage.prop("disabled", true);
               codeW.prop("disabled", true);
               codeP.prop("disabled", true);
@@ -848,6 +851,7 @@
         toggleVisibility();
       });
     </script>
+
     <!-- Warehouse & room -->
   </body>
 </html>

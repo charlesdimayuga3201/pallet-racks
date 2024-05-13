@@ -25,10 +25,12 @@
     src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
     integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8="
     crossorigin="anonymous"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <script src="landingPage.js"></script>
   <link rel="stylesheet" href="landingPage.css" />
   <link rel="stylesheet" href="title.css" />
   <link rel="stylesheet" href="modal.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
   <body class="landing-page">
     <!-- Navbar -->
@@ -60,7 +62,12 @@
           class="page-header-image"
           style="background-image: url('assets/mets3.jpeg')"></div>
         <div class="content-center">
-          <div class="container">
+          <div
+            class="container"
+            data-aos="fade-zoom-in"
+            data-aos-easing="ease-in-back"
+            data-aos-delay="300"
+            data-aos-offset="0">
             <h1 class="title p-0 m-0">
               Welcome to Mets Logistic <br />
               3D Warehouse
@@ -68,7 +75,7 @@
           </div>
           <div class="input-group mx-auto justify-content-center mt-4">
             <span
-              class="input-group-text submerged-input bg-primary opacity-2 w-25 border-0 justify-content-center text-white"
+              class="input-group-text border bg-primary submerged-input opacity-2 w-25 border-0 justify-content-center text-white"
               id="addon-wrapping"
               >Mets 3D</span
             >
@@ -207,7 +214,12 @@
       </div>
 
       <section class="bg-white pb-5 pt-5">
-        <div class="container pb-3 pt-3">
+        <div
+          class="container pb-3 pt-3"
+          data-aos="fade-right"
+          data-aos-easing="ease-in-sine"
+          data-aos-delay="100"
+          data-aos-duration="1000">
           <div class="align-items-center row">
             <div class="col-xl-5 mt-n5 order-xl-2 pb-3 pt-3">
               <img src="assets/mligif2.gif" alt="" />
@@ -307,8 +319,15 @@
         class="bg-white d-block text-bgcolor">
         <path d="M 100 100 V 0 L 0 100" />
       </svg>
+
       <section class="bg-bgcolor pb-5 pt-5 text-white">
-        <div class="container pb-3 pt-3">
+        <div
+          class="container pb-3 pt-3"
+          data-aos="fade-left"
+          data-aos-offset="300"
+          data-aos-easing="ease-in-sine"
+          data-aos-delay="100"
+          data-aos-duration="1000">
           <div class="align-items-center row flex-row-reverse">
             <div class="col-xl-5 mt-n5 order-xl-2 pb-3 pt-3">
               <img src="assets/mligif2.gif" alt="" />
@@ -425,6 +444,10 @@
         </div>
       </footer>
     </div>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({ once: false });
+    </script>
     <script>
       $(document).ready(function () {
         $("#loginForm").submit(function (event) {
@@ -486,13 +509,5 @@
         });
       });
     </script>
-    <script
-      src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js"
-      integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U"
-      crossorigin="anonymous"></script>
-    <script
-      src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
-      integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9"
-      crossorigin="anonymous"></script>
   </body>
 </html>

@@ -225,17 +225,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-@font-face {
-  font-family: "Nucleo Outline";
-  src: url("../fonts/nucleo-outline.eot");
-  src: url("../fonts/nucleo-outline.eot") format("embedded-opentype"),
-    url("../fonts/nucleo-outline.woff2") format("woff2"),
-    url("../fonts/nucleo-outline.woff") format("woff"),
-    url("../fonts/nucleo-outline.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
 @-webkit-keyframes nc-icon-spin {
   0% {
     -webkit-transform: rotate(0deg);
@@ -274,14 +263,6 @@ body {
   }
 }
 
-.now-ui-icons.ui-1_email-85:before {
-  content: "\ea2a";
-}
-
-.now-ui-icons.users_circle-08:before {
-  content: "\ea23";
-}
-
 .navbar {
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
@@ -296,99 +277,6 @@ body {
 
 .bg-bgcolor {
   background-color: #20468f !important;
-}
-
-.dropdown-menu {
-  border: 0;
-  box-shadow: 0px 10px 50px 0px rgba(0, 0, 0, 0.2);
-  border-radius: 0.125rem;
-  -webkit-transition: all 150ms linear;
-  -moz-transition: all 150ms linear;
-  -o-transition: all 150ms linear;
-  -ms-transition: all 150ms linear;
-  transition: all 150ms linear;
-  font-size: 14px;
-}
-
-.dropdown .dropdown-menu {
-  -webkit-transform: translate3d(0, -25px, 0) !important;
-  -moz-transform: translate3d(0, -25px, 0) !important;
-  -o-transform: translate3d(0, -25px, 0) !important;
-  -ms-transform: translate3d(0, -25px, 0) !important;
-  transform: translate3d(0, -25px, 0) !important;
-  visibility: hidden;
-  display: block;
-  opacity: 0;
-  filter: alpha(opacity=0);
-  top: 100% !important;
-}
-
-.dropdown-menu .dropdown-item {
-  font-size: 0.8571em;
-  padding-top: 0.6rem;
-  padding-bottom: 0.6rem;
-  margin-top: 5px;
-  -webkit-transition: all 150ms linear;
-  -moz-transition: all 150ms linear;
-  -o-transition: all 150ms linear;
-  -ms-transition: all 150ms linear;
-  transition: all 150ms linear;
-}
-
-.dropdown-menu .dropdown-item:hover,
-.dropdown-menu .dropdown-item:focus {
-  background-color: rgba(222, 222, 222, 0.3);
-}
-
-.dropdown-menu .dropdown-item:disabled {
-  color: rgba(182, 182, 182, 0.6);
-}
-
-.dropdown-menu .dropdown-item:disabled:hover,
-.dropdown-menu .dropdown-item:disabled:focus {
-  background-color: transparent;
-}
-
-.dropdown-menu:before {
-  display: inline-block;
-  position: absolute;
-  width: 0;
-  height: 0;
-  vertical-align: middle;
-  content: "";
-  top: -5px;
-  left: 10px;
-  right: auto;
-  color: #ffffff;
-  border-bottom: 0.4em solid;
-  border-right: 0.4em solid transparent;
-  border-left: 0.4em solid transparent;
-}
-
-.dropdown-menu .dropdown-divider {
-  background-color: rgba(222, 222, 222, 0.5);
-}
-
-.dropdown-menu .dropdown-header:not([href]):not([tabindex]) {
-  color: rgba(182, 182, 182, 0.6);
-  font-size: 0.7142em;
-  text-transform: uppercase;
-  font-weight: 700;
-}
-
-.button-dropdown {
-  padding-right: 0.7rem;
-  cursor: pointer;
-}
-
-.button-dropdown .dropdown-toggle {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  display: block;
-}
-
-.button-dropdown .dropdown-toggle:after {
-  display: none;
 }
 
 img {
@@ -622,45 +510,4 @@ img {
   .btn {
     margin-bottom: 10px;
   }
-}
-
-@font-face {
-  font-family: "Nucleo Outline";
-  src: url("https://github.com/creativetimofficial/now-ui-kit/blob/master/assets/fonts/nucleo-outline.eot");
-  src: url("https://github.com/creativetimofficial/now-ui-kit/blob/master/assets/fonts/nucleo-outline.eot")
-    format("embedded-opentype");
-  src: url("https://raw.githack.com/creativetimofficial/now-ui-kit/master/assets/fonts/nucleo-outline.woff2");
-  font-weight: normal;
-  font-style: normal;
-}
-
-.logo-design:after {
-  content: "";
-  background: #fd5f1f;
-  height: 4px;
-  width: 500%;
-  position: absolute;
-  border-radius: 2px;
-  top: 46%;
-  left: 120%;
-}
-
-.logo-design:before {
-  content: "";
-  background: #0563bb;
-  height: 4px;
-  width: 500%;
-  position: absolute;
-  border-radius: 2px;
-  top: 46%;
-  right: 120%;
-}
-
-.logo-design {
-  font-size: 1.1em;
-  color: #212121;
-  text-transform: uppercase;
-  position: relative;
-  text-align: center;
-  font-weight: 700;
 }
